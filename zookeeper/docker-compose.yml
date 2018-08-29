@@ -9,6 +9,9 @@ services:
     hostname: zoo1
     ports:
     - "2181:2181"
+    links:
+    - zoo2
+    - zoo3
     networks:
       zookeeper:
         aliases:
