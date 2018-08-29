@@ -1,0 +1,74 @@
+version: '2'
+services:
+  hadoop-slave1:
+    image: forsrc/hive:3.1.0
+    container_name: hadoop-slave1
+    volumes:
+    - "./volume/hadoop/work/slave1:/works"
+    - "./volume/hadoop/logs/slave1:/root/hadoop/logs/"
+    - "./volume/hadoop/tmp/slave1:/tmp"
+    hostname: hadoop-slave1
+    networks:
+    - hadoop
+    tty: true
+
+  hadoop-slave2:
+    image: forsrc/hive:3.1.0
+    container_name: hadoop-slave2
+    volumes:
+    - "./volume/hadoop/work/slave2:/works"
+    - "./volume/hadoop/logs/slave2:/root/hadoop/logs/"
+    - "./volume/hadoop/tmp/slave2:/tmp"
+    hostname: hadoop-slave2
+    networks:
+    - hadoop
+    tty: true
+
+#  hadoop-slave3:
+#    image: forsrc/hive:3.1.0
+#    container_name: hadoop-slave3
+#    volumes:
+#    - "./volume/hadoop/work/slave3:/works"
+#    - "./volume/hadoop/logs/slave3:/root/hadoop/logs/"
+#    - "./volume/hadoop/tmp/slave3:/tmp"
+#    hostname: hadoop-slave3
+#    networks:
+#    - hadoop
+#    tty: true
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+    - "./volume/mysql:/var/lib/mysql"
+    container_name: hadoop-mysql
+    hostname: mysql
+    networks:
+    - hadoop
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    tty: true
+
+  hadoop-master:
+    image: forsrc/hive:3.1.0
+    container_name: hadoop-master
+    ports:
+    - "50070:50070"
+    - "8088:8088"
+    - "9999:9999"
+    volumes:
+    - "./volume/hadoop/work/master:/works"
+    - "./volume/hadoop/logs/master:/root/hadoop/logs/"
+    - "./volume/hadoop/tmp/master:/tmp"
+    - "./volume/code:/code"
+    hostname: hadoop-master
+    links:
+    - hadoop-slave1
+    - hadoop-slave2
+#    - hadoop-slave3
+    - mysql
+    networks:
+    - hadoop
+    tty: true
+
+networks:
+  hadoop:
