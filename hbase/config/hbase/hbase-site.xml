@@ -26,8 +26,16 @@
         <value>hdfs://hadoop-master:54310/hbase</value>
     </property>
     <property>
+        <name>hbase.master.info.port</name>
+        <value>60010</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.property.clientPort</name>
+        <value>2181</value>
+    </property>
+    <property>
         <name>hbase.zookeeper.quorum</name>
-        <value>zoo1,zoo2,zoo3</value>
+        <value>zoo1:2181,zoo2:2181,zoo3:2181</value>
     </property>
     <property>
         <name>hbase.cluster.distributed</name>
