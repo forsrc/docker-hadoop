@@ -55,6 +55,7 @@ services:
     - "50070:50070"
     - "8088:8088"
     - "9999:9999"
+    - "10000:10000"
     volumes:
     - "./volume/hadoop/work/master:/works"
     - "./volume/hadoop/logs/master:/root/hadoop/logs/"
