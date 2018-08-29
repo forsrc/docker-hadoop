@@ -1,0 +1,43 @@
+version: '2'
+services:
+
+  zoo1:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./volume/zk/zoo1:/works"
+    container_name: zoo1
+    hostname: zoo1
+    ports:
+    - "2181:2181"
+    networks:
+      zookeeper:
+        aliases:
+        - zoo1
+    tty: true
+
+  zoo2:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./volume/zk/zoo2:/works"
+    container_name: zoo2
+    hostname: zoo2
+    networks:
+      zookeeper:
+        aliases:
+        - zoo2
+    tty: true
+
+  zoo3:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./volume/zk/zoo3:/works"
+    container_name: zoo3
+    hostname: zoo3
+    networks:
+      zookeeper:
+        aliases:
+        - zoo3
+    tty: true
+
+networks:
+  zookeeper:
