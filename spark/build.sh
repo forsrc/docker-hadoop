@@ -1,0 +1,1 @@
+docker build -t forsrc/spark:2.3.1 .
