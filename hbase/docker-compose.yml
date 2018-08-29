@@ -1,0 +1,126 @@
+version: '2'
+services:
+  hbase-slave1:
+    image: forsrc/hbase:2.1.0
+    container_name: hadoop-slave1
+    volumes:
+    - "./volume/hadoop/work/slave1:/works/hbase"
+    - "./volume/hadoop/logs/slave1:/root/hadoop/logs/"
+    - "./volume/spark/logs/slave1:/root/spark/logs/"
+    - "./volume/hbase/slave1:/works"
+    - "./volume/hbase/logs/slave1:/root/hbase/logs/"
+    hostname: hadoop-slave1
+    networks:
+      hbase:
+        aliases:
+        - hadoop-slave1
+    tty: true
+
+  hbase-slave2:
+    image: forsrc/hbase:2.1.0
+    container_name: hbase-slave2
+    volumes:
+    - "./volume/hadoop/work/slave2:/works/hbase"
+    - "./volume/hadoop/logs/slave2:/root/hadoop/logs/"
+    - "./volume/spark/logs/slave2:/root/spark/logs/"
+    - "./volume/hbase/slave2:/works/"
+    - "./volume/hbase/logs/slave2:/root/hbase/logs/"
+    hostname: hadoop-slave2
+    networks:
+      hbase:
+        aliases:
+        - hadoop-slave2
+    tty: true
+
+  #  hbase-slave3:
+  #    image: forsrc/hbase:2.1.0
+  #    container_name: hbase-slave3
+  #    volumes:
+  #      - "./volume/hadoop/work/slave3:/works/hbase"
+  #      - "./volume/hadoop/logs/slave3:/root/hadoop/logs/"
+  #      - "./volume/spark/logs/slave3:/root/spark/logs/"
+  #      - "./volume/hbase/slave3:/works/"
+  #      - "./volume/hbase/logs/slave3:/root/hbase/logs/"
+  #    hostname: hadoop-slave3
+  #    networks:
+  #      hbase:
+  #        aliases:
+  #          - hadoop-slave3
+  #    tty: true
+
+
+  hbase-master:
+    image: forsrc/hbase:2.1.0
+    container_name: hadoop-master
+    ports:
+    - "50070:50070"
+    - "8088:8088"
+    - "8080:8080"
+    - "8042:8042"
+    - "16010:16010"
+    - "2181:2181"
+    - "10000:10000"
+    volumes:
+    - "./volume/hadoop/work/master:/works/hbase"
+    - "./volume/hadoop/logs/master:/root/hadoop/logs/"
+    - "./volume/spark/logs/master:/root/spark/logs/"
+    - "./volume/hbase/master:/works/"
+    - "./volume/hbase/logs/master:/root/hbase/logs/"
+    - "./volume/code:/code"
+    hostname: hbase-master
+    networks:
+      hbase:
+        aliases:
+        - hbase-master
+    tty: true
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+    - "./volume/mysql:/var/lib/mysql"
+    container_name: hadoop-mysql
+    hostname: mysql
+    networks:
+    - hbase
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    tty: true
+
+  zoo1:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./volume/zk/zoo1:/works"
+    container_name: zoo1
+    hostname: zoo1
+    networks:
+      hbase:
+        aliases:
+        - zoo1
+    tty: true
+
+  zoo2:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./volume/zk/zoo2:/works"
+    container_name: zoo2
+    hostname: zoo2
+    networks:
+      hbase:
+        aliases:
+        - zoo2
+    tty: true
+
+  zoo3:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./volume/zk/zoo3:/works"
+    container_name: zoo3
+    hostname: zoo3
+    networks:
+      hbase:
+        aliases:
+        - zoo3
+    tty: true
+
+networks:
+  hbase:
