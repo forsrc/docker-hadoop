@@ -48,7 +48,7 @@
     </property>
     <property>
         <name>hive.exec.scratchdir</name>
-        <value>/work/hive/exec/scratchdir</value>
+        <value>/works/hive/exec/scratchdir</value>
         <description>HDFS root scratch dir for Hive jobs which gets created with write all (733) permission. For each
             connecting user, an HDFS scratch dir: ${hive.exec.scratchdir}/&lt;username&gt; is created, with
             ${hive.scratch.dir.permission}.
@@ -351,7 +351,7 @@
     </property>
     <property>
         <name>hive.metastore.warehouse.dir</name>
-        <value>/work/hive/warehouse</value>
+        <value>/works/hive/warehouse</value>
         <description>location of default database for the warehouse</description>
     </property>
     <property>
@@ -2606,7 +2606,7 @@
     </property>
     <property>
         <name>hive.hbase.snapshot.restoredir</name>
-        <value>/work/hive/hbase/restoredir</value>
+        <value>/works/hive/hbase/restoredir</value>
         <description>The directory in which to restore the HBase table snapshot.</description>
     </property>
     <property>
