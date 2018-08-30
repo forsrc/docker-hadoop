@@ -48,7 +48,7 @@
     </property>
     <property>
         <name>hive.exec.scratchdir</name>
-        <value>/tmp/hive</value>
+        <value>/work/hive/exec</value>
         <description>HDFS root scratch dir for Hive jobs which gets created with write all (733) permission. For each
             connecting user, an HDFS scratch dir: ${hive.exec.scratchdir}/&lt;username&gt; is created, with
             ${hive.scratch.dir.permission}.
@@ -56,12 +56,12 @@
     </property>
     <property>
         <name>hive.exec.local.scratchdir</name>
-        <value>/works/hive/</value>
+        <value>/works/hive/exec/local</value>
         <description>Local scratch space for Hive jobs</description>
     </property>
     <property>
         <name>hive.downloaded.resources.dir</name>
-        <value>/works/hive/${hive.session.id}_resources</value>
+        <value>/works/hive/downloaded/${hive.session.id}_resources</value>
         <description>Temporary local directory for added resources in the remote file system.</description>
     </property>
     <property>
@@ -1274,7 +1274,7 @@
     </property>
     <property>
         <name>hive.querylog.location</name>
-        <value>/works/hive/</value>
+        <value>/works/hive/querylog</value>
         <description>Location of Hive run time structured log file</description>
     </property>
     <property>
@@ -2606,7 +2606,7 @@
     </property>
     <property>
         <name>hive.hbase.snapshot.restoredir</name>
-        <value>/tmp</value>
+        <value>/work/hive/hbase/restoredir</value>
         <description>The directory in which to restore the HBase table snapshot.</description>
     </property>
     <property>
