@@ -19,17 +19,17 @@
 <configuration>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:/hadoop/dfs/name</value>
+        <value>file:/work/hadoop/dfs/name</value>
     </property>
 
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:/hadoop/dfs/data</value>
+        <value>file:/work/hadoop/dfs/data</value>
     </property>
 
     <property>
         <name>dfs.namenode.checkpoint.dir</name>
-        <value>file:/hadoop/dfs/namesecondary</value>
+        <value>file:/work/hadoop/dfs/namesecondary</value>
     </property>
 
     <property>
