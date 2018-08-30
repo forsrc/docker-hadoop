@@ -41,7 +41,7 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 export HIVE_HOME=/root/hive
 export SPARK_WORKER_MEMORY=2g
-export SPARK_MASTER_IP=hbase-master.hadoop-docker
+export SPARK_MASTER_IP=hadoop-master
 export HIVE_CONF_DIR=$HIVE_HOME/conf
 
 # - SPARK_WORKER_PORT / SPARK_WORKER_WEBUI_PORT, to use non-default ports for the worker
