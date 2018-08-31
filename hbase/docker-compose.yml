@@ -4,7 +4,6 @@ services:
     image: forsrc/hbase:2.1.0
     container_name: hadoop-slave1
     volumes:
-    - "./volume/hadoop/work/slave1:/works/hbase"
     - "./volume/hadoop/logs/slave1:/root/hadoop/logs/"
     - "./volume/spark/logs/slave1:/root/spark/logs/"
     - "./volume/hbase/slave1:/works"
@@ -21,7 +20,6 @@ services:
     image: forsrc/hbase:2.1.0
     container_name: hbase-slave2
     volumes:
-    - "./volume/hadoop/work/slave2:/works/hbase"
     - "./volume/hadoop/logs/slave2:/root/hadoop/logs/"
     - "./volume/spark/logs/slave2:/root/spark/logs/"
     - "./volume/hbase/slave2:/works/"
@@ -63,7 +61,6 @@ services:
     - "2181:2181"
     - "10000:10000"
     volumes:
-    - "./volume/hadoop/work/master:/works/hbase"
     - "./volume/hadoop/logs/master:/root/hadoop/logs/"
     - "./volume/spark/logs/master:/root/spark/logs/"
     - "./volume/hbase/master:/works/"
