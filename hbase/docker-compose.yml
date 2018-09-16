@@ -1,6 +1,6 @@
 version: '2'
 services:
-  hbase-slave1:
+  hadoop-slave1:
     image: forsrc/hbase:2.1.0
     container_name: hadoop-slave1
     volumes:
@@ -16,9 +16,9 @@ services:
         - hadoop-slave1
     tty: true
 
-  hbase-slave2:
+  hadoop-slave2:
     image: forsrc/hbase:2.1.0
-    container_name: hbase-slave2
+    container_name: hadoop-slave2
     volumes:
     - "./volume/hadoop/logs/slave2:/root/hadoop/logs/"
     - "./volume/spark/logs/slave2:/root/spark/logs/"
@@ -32,9 +32,9 @@ services:
         - hadoop-slave2
     tty: true
 
-  #  hbase-slave3:
+  #  hadoop-slave3:
   #    image: forsrc/hbase:2.1.0
-  #    container_name: hbase-slave3
+  #    container_name: hadoop-slave3
   #    volumes:
   #      - "./volume/hadoop/work/slave3:/works/hbase"
   #      - "./volume/hadoop/logs/slave3:/root/hadoop/logs/"
@@ -49,7 +49,7 @@ services:
   #    tty: true
 
 
-  hbase-master:
+  hadoop-master:
     image: forsrc/hbase:2.1.0
     container_name: hadoop-master
     ports:
@@ -67,11 +67,11 @@ services:
     - "./volume/hbase/logs/master:/root/hbase/logs/"
     - "./volume/code:/code"
     - "./volume/etc/localtime:/etc/localtime:ro"
-    hostname: hbase-master
+    hostname: hadoop-master
     networks:
       hbase:
         aliases:
-        - hbase-master
+        - hadoop-master
     tty: true
 
   mysql:
