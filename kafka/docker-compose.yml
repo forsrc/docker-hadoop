@@ -1,0 +1,47 @@
+version: '2'
+services:
+
+  kafka1:
+    image: forsrc/kafka:2.12
+    volumes:
+    - "./volume/kafka/kafka1:/works"
+    container_name: kafka1
+    hostname: kafka1
+    ports:
+    - "2181:2181"
+    - "9092:9092"
+    links:
+    - kafka2
+    - kafka3
+    networks:
+      kafka:
+        aliases:
+        - kafka1
+    tty: true
+
+  kafka2:
+    image: forsrc/kafka:2.12
+    volumes:
+    - "./volume/kafka/kafka2:/works"
+    container_name: kafka2
+    hostname: kafka2
+    networks:
+      kafka:
+        aliases:
+        - kafka2
+    tty: true
+
+  kafka3:
+    image: forsrc/kafka:2.12
+    volumes:
+    - "./volume/kafka/kafka3:/works"
+    container_name: kafka3
+    hostname: kafka3
+    networks:
+      kafka:
+        aliases:
+        - kafka3
+    tty: true
+
+networks:
+  kafka:
