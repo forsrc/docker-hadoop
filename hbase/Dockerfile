@@ -14,14 +14,13 @@ RUN wget http://archive.apache.org/dist/hbase/$HBASE_VERSION/hbase-$HBASE_VERSIO
     mv /root/hbase-$HBASE_VERSION $HBASE_HOME && \
 	rm -rf hbase-$HBASE_VERSION-bin.tar.gz
 
-RUN find $HBASE_HOME/lib -name "hadoop*jar" | xargs -i rm -f {}
+#RUN find $HBASE_HOME/lib -name "hadoop*jar" | xargs -i rm -f {}
+#RUN find $HADOOP_HOME/share/hadoop -name "hadoop*jar" | xargs -i cp {} $HBASE_HOME/lib/
 RUN find $HBASE_HOME/lib -name "zookeeper*jar" | xargs -i rm -f {}
-RUN find $HADOOP_HOME/share/hadoop -name "hadoop*jar" | xargs -i cp {} $HBASE_HOME/lib/
+ADD file/zookeeper-3.4.13.jar $HBASE_HOME/lib/
 
 RUN cp -f $HADOOP_HOME/etc/hadoop/core-site.xml $HBASE_HOME/conf/ && \
     cp -f $HADOOP_HOME/etc/hadoop/hdfs-site.xml $HBASE_HOME/conf/
-
-ADD file/zookeeper-3.4.13.jar $HBASE_HOME/lib/
 
 ADD config/hbase/* $HBASE_HOME/conf/
 

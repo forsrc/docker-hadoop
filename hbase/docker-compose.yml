@@ -8,7 +8,7 @@ services:
     - "./volume/spark/logs/slave1:/root/spark/logs/"
     - "./volume/hbase/slave1:/works"
     - "./volume/hbase/logs/slave1:/root/hbase/logs/"
-    - "./volume/etc/localtime:/etc/localtime:ro"
+    #- "./volume/etc/localtime:/etc/localtime:ro"
     hostname: hadoop-slave1
     networks:
       hbase:
@@ -24,7 +24,7 @@ services:
     - "./volume/spark/logs/slave2:/root/spark/logs/"
     - "./volume/hbase/slave2:/works/"
     - "./volume/hbase/logs/slave2:/root/hbase/logs/"
-    - "./volume/etc/localtime:/etc/localtime:ro"
+    #- "./volume/etc/localtime:/etc/localtime:ro"
     hostname: hadoop-slave2
     networks:
       hbase:
@@ -66,7 +66,7 @@ services:
     - "./volume/hbase/master:/works/"
     - "./volume/hbase/logs/master:/root/hbase/logs/"
     - "./volume/code:/code"
-    - "./volume/etc/localtime:/etc/localtime:ro"
+    #- "./volume/etc/localtime:/etc/localtime:ro"
     hostname: hadoop-master
     networks:
       hbase:
@@ -78,7 +78,7 @@ services:
     image: mysql:5.7
     volumes:
     - "./volume/mysql:/var/lib/mysql"
-    - "./volume/etc/localtime:/etc/localtime:ro"
+    #- "./volume/etc/localtime:/etc/localtime:ro"
     container_name: hadoop-mysql
     hostname: mysql
     networks:
@@ -91,7 +91,7 @@ services:
     image: forsrc/zookeeper:3.4.13
     volumes:
     - "./volume/zk/zoo1:/works"
-    - "./volume/etc/localtime:/etc/localtime:ro"
+    #- "./volume/etc/localtime:/etc/localtime:ro"
     container_name: zoo1
     hostname: zoo1
     networks:
@@ -104,7 +104,7 @@ services:
     image: forsrc/zookeeper:3.4.13
     volumes:
     - "./volume/zk/zoo2:/works"
-    - "./volume/etc/localtime:/etc/localtime:ro"
+    #- "./volume/etc/localtime:/etc/localtime:ro"
     container_name: zoo2
     hostname: zoo2
     networks:
@@ -117,7 +117,7 @@ services:
     image: forsrc/zookeeper:3.4.13
     volumes:
     - "./volume/zk/zoo3:/works"
-    - "./volume/etc/localtime:/etc/localtime:ro"
+    #- "./volume/etc/localtime:/etc/localtime:ro"
     container_name: zoo3
     hostname: zoo3
     networks:
