@@ -1,0 +1,3 @@
+# A Spark Worker will be started on each of the machines listed below.
+hadoop-slave1
+hadoop-slave2
