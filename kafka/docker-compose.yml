@@ -17,6 +17,7 @@ services:
       kafka:
         aliases:
         - kafka1
+        - zoo1
     tty: true
 
   kafka2:
@@ -29,6 +30,7 @@ services:
       kafka:
         aliases:
         - kafka2
+        - zoo2
     tty: true
 
   kafka3:
@@ -41,6 +43,7 @@ services:
       kafka:
         aliases:
         - kafka3
+        - zoo3
     tty: true
 
 networks:
