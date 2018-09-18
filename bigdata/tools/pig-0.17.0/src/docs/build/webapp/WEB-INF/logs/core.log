@@ -1,0 +1,3 @@
+WARN    (2017-06-02) 15:42.31:567   [core.language.java] (Unknown-URI) Unknown-Thread/JavaLanguage: Attempted to retrieve directory listing of non-directory /Users/szita/Library/Java/Extensions
+WARN    (2017-06-02) 15:42.31:572   [core.language.java] (Unknown-URI) Unknown-Thread/JavaLanguage: Attempted to retrieve directory listing of non-directory /Network/Library/Java/Extensions
+WARN    (2017-06-02) 15:42.31:572   [core.language.java] (Unknown-URI) Unknown-Thread/JavaLanguage: Attempted to retrieve directory listing of non-directory /usr/lib/java
