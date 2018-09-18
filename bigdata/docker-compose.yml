@@ -1,0 +1,106 @@
+version: '2'
+services:
+  hadoop-slave1:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-slave1
+    volumes:
+    - "./works/hbase/slave1:/works"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    hostname: hadoop-slave1
+    networks:
+      hbase:
+        aliases:
+        - hadoop-slave1
+    tty: true
+
+  hadoop-slave2:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-slave2
+    volumes:
+    - "./works/slave2:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    hostname: hadoop-slave2
+    networks:
+      hbase:
+        aliases:
+        - hadoop-slave2
+    tty: true
+
+  hadoop-master:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-master
+    ports:
+    - "50070:50070"
+    - "8088:8088"
+    - "8080:8080"
+    - "8042:8042"
+    - "60010:60010"
+    - "2181:2181"
+    - "10000:10000"
+    volumes:
+    - "./works/master:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    - "./code:/code"
+    hostname: hadoop-master
+    networks:
+      hbase:
+        aliases:
+        - hadoop-master
+    tty: true
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+    - "./works/mysql:/var/lib/mysql"
+    container_name: hadoop-mysql
+    hostname: mysql
+    networks:
+    - hbase
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    tty: true
+
+  zoo1:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./works/zk/zoo1:/works"
+    - "./tools/bashrc:/root/.bashrc"
+    container_name: zoo1
+    hostname: zoo1
+    networks:
+      hbase:
+        aliases:
+        - zoo1
+    tty: true
+
+  zoo2:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./works/zk/zoo2:/works"
+    - "./tools/bashrc:/root/.bashrc"
+    container_name: zoo2
+    hostname: zoo2
+    networks:
+      hbase:
+        aliases:
+        - zoo2
+    tty: true
+
+  zoo3:
+    image: forsrc/zookeeper:3.4.13
+    volumes:
+    - "./works/zk/zoo3:/works"
+    - "./tools/bashrc:/root/.bashrc"
+    container_name: zoo3
+    hostname: zoo3
+    networks:
+      hbase:
+        aliases:
+        - zoo3
+    tty: true
+
+networks:
+  hbase:
