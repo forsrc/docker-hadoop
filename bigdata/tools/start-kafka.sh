@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
 echo `hostname` ... START
+
+. /root/.bashrc
 
 echo $ZOOKEEPER_HOME/bin/zkServer.sh start
 $ZOOKEEPER_HOME/bin/zkServer.sh start

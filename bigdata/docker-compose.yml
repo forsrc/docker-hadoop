@@ -64,10 +64,14 @@ services:
     tty: true
 
   zoo1:
-    image: forsrc/zookeeper:3.4.13
+    image: forsrc/ubuntu-ssh:18.10
     volumes:
     - "./works/zk/zoo1:/works"
+    - "./tools:/tools/"
     - "./tools/bashrc:/root/.bashrc"
+    command: ["/bin/sh", "-c", "/tools/start-zookeeper.sh; bash"]
+    expose:
+    - 2181
     container_name: zoo1
     hostname: zoo1
     networks:
@@ -77,10 +81,14 @@ services:
     tty: true
 
   zoo2:
-    image: forsrc/zookeeper:3.4.13
+    image: forsrc/ubuntu-ssh:18.10
     volumes:
     - "./works/zk/zoo2:/works"
+    - "./tools:/tools/"
     - "./tools/bashrc:/root/.bashrc"
+    command: ["/bin/sh", "-c", "/tools/start-zookeeper.sh; bash"]
+    expose:
+    - 2181
     container_name: zoo2
     hostname: zoo2
     networks:
@@ -90,10 +98,14 @@ services:
     tty: true
 
   zoo3:
-    image: forsrc/zookeeper:3.4.13
+    image: forsrc/ubuntu-ssh:18.10
     volumes:
     - "./works/zk/zoo3:/works"
+    - "./tools:/tools/"
     - "./tools/bashrc:/root/.bashrc"
+    command: ["/bin/sh", "-c", "/tools/start-zookeeper.sh; bash"]
+    expose:
+    - 2181
     container_name: zoo3
     hostname: zoo3
     networks:

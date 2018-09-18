@@ -33,5 +33,5 @@ EXPOSE 22
 
 ADD start.sh /
 
-#CMD ["/bin/sh", "-c", "/start.sh; bash"]
-ENTRYPOINT ["/bin/sh", "-c", "/start.sh; bash"]
+CMD ["/bin/sh", "-c", "/start.sh; bash"]
+#ENTRYPOINT ["/bin/sh", "-c", "/start.sh; bash"]
