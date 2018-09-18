@@ -1,0 +1,11 @@
+
+Release Notes - Hive - Version 2.3.3
+
+
+
+** Bug
+    * [HIVE-16939] - metastore error: 'export: -Dproc_metastore : not a valid identifier'
+    * [HIVE-18788] - Clean up inputs in JDBC PreparedStatement
+    * [HIVE-18815] - Remove unused feature in HPL/SQL
+    * [HIVE-18879] - Disallow embedded element in UDFXPathUtil needs to work if xercesImpl.jar in classpath
+    * [HIVE-18885] - DbNotificationListener has a deadlock between Java and DB locks (2.x line)
