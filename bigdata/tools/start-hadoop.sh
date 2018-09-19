@@ -8,4 +8,6 @@ $HADOOP_HOME/sbin/start-dfs.sh
 echo $HADOOP_HOME/sbin/start-yarn.sh
 $HADOOP_HOME/sbin/start-yarn.sh
 
+sleep 2
+
 echo `hostname` ... END

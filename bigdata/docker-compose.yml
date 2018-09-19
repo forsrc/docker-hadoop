@@ -44,6 +44,7 @@ services:
     - "./tools:/tools/"
     - "./tools/bashrc:/root/.bashrc"
     - "./code:/code"
+    command: ["/bin/sh", "-c", "/start.sh &&/tools/start-hadoop.sh && /tools/start-spark.sh && /tools/start-hbase.sh; bash"]
     hostname: hadoop-master
     networks:
       hbase:

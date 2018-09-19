@@ -6,7 +6,7 @@ echo `hostname` ... START
 echo $ZOOKEEPER_HOME/bin/zkServer.sh start
 $ZOOKEEPER_HOME/bin/zkServer.sh start
 
-sleep 5
+sleep 3
 $ZOOKEEPER_HOME/bin/zkServer.sh status
 
 echo `hostname` ... END

@@ -3,7 +3,7 @@ echo `hostname` ... START
 
 . /root/.bashrc
 
-echo /usr/sbin/sshd
-/usr/sbin/sshd
+echo $HBASE_HOME/bin/start-hbase.sh
+$HBASE_HOME/bin/start-hbase.sh
 
 echo `hostname` ... END
