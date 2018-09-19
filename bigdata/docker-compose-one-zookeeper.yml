@@ -1,0 +1,113 @@
+version: '2'
+services:
+  hadoop-slave1:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-slave1
+    volumes:
+    - "./works/slave1:/works"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    hostname: hadoop-slave1
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-slave1
+    tty: true
+
+  hadoop-slave2:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-slave2
+    volumes:
+    - "./works/slave2:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    hostname: hadoop-slave2
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-slave2
+    tty: true
+
+  hadoop-master:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-master
+    ports:
+    - "50070:50070"
+    - "54310:54310"
+    - "4040:4040"
+    - "7077:7077"
+    - "8088:8088"
+    - "8080:8080"
+    - "8042:8042"
+    - "60010:60010"
+    - "10000:10000"
+    volumes:
+    - "./works/master:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    - "./code:/code"
+    command: ["/bin/sh", "-c", "/start.sh &&/tools/start-hadoop.sh && /tools/start-spark.sh && /tools/start-hbase.sh; bash"]
+    hostname: hadoop-master
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-master
+    tty: true
+
+  hadoop-hive:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-hive
+    ports:
+    - "10002:10002"
+    volumes:
+    - "./works/hive:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    - "./code:/code"
+    command: ["/bin/sh", "-c", "/tools/start-hive.sh; bash"]
+    hostname: hadoop-hive
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-hive
+    tty: true
+
+  hadoop-mysql:
+    image: mysql:5.7
+    volumes:
+    - "./works/mysql:/var/lib/mysql"
+    - "./works/mysql/etc/my.cnf:/etc/mysql/my.cnf"
+    container_name: hadoop-mysql
+    hostname: mysql
+    networks:
+      bigdata:
+        aliases:
+        - mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    tty: true
+
+  zoo1:
+    image: forsrc/ubuntu-ssh:18.10
+    volumes:
+    - "./works/zk/zoo1:/works"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    - "./config/one-zookeeper/zoo.cfg:/tools/zookeeper-3.4.13/conf/zoo.cfg"
+    command: ["/bin/sh", "-c", "/tools/start-zookeeper.sh; bash"]
+    expose:
+    - 2181
+    ports:
+    - "2181:2181"
+    container_name: zoo1
+    hostname: zoo1
+    networks:
+      bigdata:
+        aliases:
+        - zoo1
+        - zoo2
+        - zoo3
+    tty: true
+
+networks:
+  bigdata:

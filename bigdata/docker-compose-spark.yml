@@ -1,0 +1,56 @@
+version: '2'
+services:
+  hadoop-slave1:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-slave1
+    volumes:
+    - "./works/slave1:/works"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    hostname: hadoop-slave1
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-slave1
+    tty: true
+
+  hadoop-slave2:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-slave2
+    volumes:
+    - "./works/slave2:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    hostname: hadoop-slave2
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-slave2
+    tty: true
+
+  hadoop-master:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-master
+    ports:
+    - "50070:50070"
+    - "54310:54310"
+    - "4040:4040"
+    - "7077:7077"
+    - "8088:8088"
+    - "8080:8080"
+    - "8042:8042"
+    volumes:
+    - "./works/master:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    - "./code:/code"
+    command: ["/bin/sh", "-c", "/start.sh && /tools/start-hadoop.sh && /tools/start-spark.sh; bash"]
+    hostname: hadoop-master
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-master
+    tty: true
+
+networks:
+  bigdata:
