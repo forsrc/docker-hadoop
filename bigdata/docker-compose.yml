@@ -33,11 +33,11 @@ services:
     container_name: hadoop-master
     ports:
     - "50070:50070"
+    - "7077:7077"
     - "8088:8088"
     - "8080:8080"
     - "8042:8042"
     - "60010:60010"
-    - "2181:2181"
     - "10000:10000"
     volumes:
     - "./works/master:/works/"
@@ -50,6 +50,24 @@ services:
       bigdata:
         aliases:
         - hadoop-master
+    tty: true
+
+  hadoop-hive:
+    image: forsrc/ubuntu-ssh:18.10
+    container_name: hadoop-hive
+    ports:
+    - "10002:10002"
+    volumes:
+    - "./works/hive:/works/"
+    - "./tools:/tools/"
+    - "./tools/bashrc:/root/.bashrc"
+    - "./code:/code"
+    command: ["/bin/sh", "-c", "/tools/start-hive.sh; bash"]
+    hostname: hadoop-hive
+    networks:
+      bigdata:
+        aliases:
+        - hadoop-hive
     tty: true
 
   hadoop-mysql:
@@ -76,6 +94,8 @@ services:
     command: ["/bin/sh", "-c", "/tools/start-zookeeper.sh; bash"]
     expose:
     - 2181
+    ports:
+    - "2181:2181"
     container_name: zoo1
     hostname: zoo1
     networks:

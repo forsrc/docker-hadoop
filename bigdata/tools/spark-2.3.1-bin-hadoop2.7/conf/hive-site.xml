@@ -2412,7 +2412,7 @@
     </property>
     <property>
         <name>hive.zookeeper.quorum</name>
-        <value/>
+        <value>zoo1:2181,zoo2:2181,zoo3:2181</value>
         <description>
             List of ZooKeeper servers to talk to. This is needed for:
             1. Read/write locks - when hive.lock.manager is set to
