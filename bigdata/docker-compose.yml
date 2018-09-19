@@ -4,12 +4,12 @@ services:
     image: forsrc/ubuntu-ssh:18.10
     container_name: hadoop-slave1
     volumes:
-    - "./works/hbase/slave1:/works"
+    - "./works/slave1:/works"
     - "./tools:/tools/"
     - "./tools/bashrc:/root/.bashrc"
     hostname: hadoop-slave1
     networks:
-      hbase:
+      bigdata:
         aliases:
         - hadoop-slave1
     tty: true
@@ -23,7 +23,7 @@ services:
     - "./tools/bashrc:/root/.bashrc"
     hostname: hadoop-slave2
     networks:
-      hbase:
+      bigdata:
         aliases:
         - hadoop-slave2
     tty: true
@@ -47,19 +47,22 @@ services:
     command: ["/bin/sh", "-c", "/start.sh &&/tools/start-hadoop.sh && /tools/start-spark.sh && /tools/start-hbase.sh; bash"]
     hostname: hadoop-master
     networks:
-      hbase:
+      bigdata:
         aliases:
         - hadoop-master
     tty: true
 
-  mysql:
+  hadoop-mysql:
     image: mysql:5.7
     volumes:
     - "./works/mysql:/var/lib/mysql"
+    - "./works/mysql/etc/my.cnf:/etc/mysql/my.cnf"
     container_name: hadoop-mysql
     hostname: mysql
     networks:
-    - hbase
+      bigdata:
+        aliases:
+        - mysql
     environment:
     - MYSQL_ROOT_PASSWORD=root
     tty: true
@@ -76,7 +79,7 @@ services:
     container_name: zoo1
     hostname: zoo1
     networks:
-      hbase:
+      bigdata:
         aliases:
         - zoo1
     tty: true
@@ -93,7 +96,7 @@ services:
     container_name: zoo2
     hostname: zoo2
     networks:
-      hbase:
+      bigdata:
         aliases:
         - zoo2
     tty: true
@@ -110,10 +113,10 @@ services:
     container_name: zoo3
     hostname: zoo3
     networks:
-      hbase:
+      bigdata:
         aliases:
         - zoo3
     tty: true
 
 networks:
-  hbase:
+  bigdata:
