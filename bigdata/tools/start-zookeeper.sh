@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo ================================================ START
 echo `hostname` ... START
 
 . /root/.bashrc
@@ -10,3 +11,4 @@ sleep 5
 $ZOOKEEPER_HOME/bin/zkServer.sh status
 
 echo `hostname` ... END
+echo ================================================ END

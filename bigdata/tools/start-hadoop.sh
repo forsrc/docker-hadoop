@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo ================================================ START
 echo `hostname` ... START
 
 . /root/.bashrc
@@ -12,3 +13,4 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver
 sleep 2
 
 echo `hostname` ... END
+echo ================================================ END

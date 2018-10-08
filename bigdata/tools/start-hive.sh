@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo ================================================ START
 echo `hostname` ... START
 
 . /root/.bashrc
@@ -13,3 +14,4 @@ echo $HIVE_HOME/bin/hive --service hiveserver2
 nohup $HIVE_HOME/bin/hive --service hiveserver2 >/dev/null 2>&1 &
 
 echo `hostname` ... END
+echo ================================================ END
