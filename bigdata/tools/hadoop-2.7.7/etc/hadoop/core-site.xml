@@ -19,7 +19,7 @@
 <configuration>
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>file:/works/hadoop_tmp/hadoop_${user.name}</value>
+        <value>file:/tmp/hadoop_tmp/hadoop_${user.name}</value>
     </property>
     <property>
         <name>io,native.lib.available</name>

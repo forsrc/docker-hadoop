@@ -43,7 +43,7 @@ services:
     - "./tools:/tools/"
     - "./tools/bashrc:/root/.bashrc"
     - "./code:/code"
-    command: ["/bin/sh", "-c", "/start.sh &&/tools/start-hadoop.sh; bash"]
+    command: ["/bin/sh", "-c", "/start.sh && /tools/start-hadoop.sh; bash"]
     hostname: hadoop-master
     networks:
       bigdata:
