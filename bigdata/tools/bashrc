@@ -14,6 +14,8 @@ export HADOOP_HOME=/tools/hadoop-2.7.7
 
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
+export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar
+
 export HIVE_HOME=/tools/apache-hive-2.3.3-bin
 
 export ZOOKEEPER_HOME=/tools/zookeeper-3.4.13
