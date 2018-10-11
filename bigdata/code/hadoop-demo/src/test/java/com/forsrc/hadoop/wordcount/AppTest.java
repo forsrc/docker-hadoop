@@ -1,4 +1,4 @@
-package com.forsrc.hadoop;
+package com.forsrc.hadoop.wordcount;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
