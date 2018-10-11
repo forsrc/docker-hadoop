@@ -17,7 +17,7 @@ hive
 
 hive --service metastore
 
-hive –service hwi #127.0.0.1:9999/hwi
+hive --service hwi #127.0.0.1:9999/hwi
 
 hiveserver2
 
