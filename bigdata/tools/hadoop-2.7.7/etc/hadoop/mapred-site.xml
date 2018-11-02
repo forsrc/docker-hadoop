@@ -34,7 +34,7 @@
 
     <property>
         <name>mapreduce.job.tracker</name>
-        <value>hdfs://hadoop-master:9001</value>
+        <value>hadoop-master:9001</value>
         <final>true</final>
     </property>
 
