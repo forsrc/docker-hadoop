@@ -2,11 +2,11 @@ package com.forsrc.hadoop.wordcount;
 
 import com.forsrc.hadoop.utils.JarUtils;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -53,28 +53,29 @@ public class WordCountSubmit {
 
     public static void main(String[] args) throws Exception {
 
-        System.setProperty("hadoop.home.dir", "C:\\tools\\apache\\hadoop-2.7.7");
+        // windows:  route -p add 172.25.0.0 MASK 255.255.255.0 10.0.75.2  ### route delete 172.25.0.0
+        //System.setProperty("hadoop.home.dir", "C:\\tools\\apache\\hadoop-2.7.7");
         System.setProperty("HADOOP_USER_NAME", "root");
 
         Configuration conf = new Configuration();
 
-        conf.set("hadoop.job.user", "root");
-        conf.set("mapred.remote.os","Linux");
-        //conf.set("fs.default.name", "hdfs://hadoop-master:9000");
-        conf.addResource("classpath:hadoop/core-site.xml");
-        conf.addResource("classpath:hadoop/hdfs-site.xml");
-        conf.addResource("classpath:hadoop/mapred-site.xml");
-        conf.addResource("classpath:hadoop/yarn-site.xml");
-        conf.set("fs.defaultFS", "hdfs://hadoop-master:9000");
-        conf.set("mapred.job.tracker", "hadoop-master:9001");
-        conf.set("mapreduce.framework.name", "yarn");
-        conf.set("yarn.resourcemanager.address", "hadoop-master:8032");
-        conf.set("mapreduce.app-submission.cross-platform", "true");
+//        conf.set("mapreduce.cluster.local.dir","/tmp/hadoop/local");
+//        conf.set("hadoop.job.user", "root");
+//        conf.set("mapred.remote.os","Linux");
+//        //conf.set("fs.default.name", "hdfs://hadoop-master:9000");
+//        conf.addResource("classpath:hadoop/core-site.xml");
+//        conf.addResource("classpath:hadoop/hdfs-site.xml");
+//        conf.addResource("classpath:hadoop/mapred-site.xml");
+//        conf.addResource("classpath:hadoop/yarn-site.xml");
+//        conf.set("fs.defaultFS", "hdfs://hadoop-master:9000");
+//        conf.set("mapred.job.tracker", "hadoop-master:9001");
+//        conf.set("mapreduce.framework.name", "yarn");
+//        conf.set("yarn.resourcemanager.address", "hadoop-master:8032");
 
+        conf.set("mapreduce.app-submission.cross-platform", "true");
         conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
 
         File jar = JarUtils.buildJar(WordCountSubmit.class);
-        //JobConf jobConf = (JobConf) job.getConfiguration();
         Job job = Job.getInstance(conf, "word count submit");
         job.setJar(jar.toString());
         job.setJarByClass(WordCountSubmit.class);
@@ -91,8 +92,15 @@ public class WordCountSubmit {
         FileSystem fileSystem = FileSystem.get(conf);
         fileSystem.delete(new Path(args[1]), true);
 
+        FileStatus[] fileStatuses = fileSystem.listStatus(new Path("/"));
+        for (FileStatus fileStatus : fileStatuses) {
+            System.out.println(fileStatus);
+        }
+        System.out.println();
+
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 }
