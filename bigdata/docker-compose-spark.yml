@@ -10,6 +10,7 @@ services:
     hostname: hadoop-slave1
     networks:
       bigdata:
+        ipv4_address: 172.25.0.11
         aliases:
         - hadoop-slave1
     tty: true
@@ -24,6 +25,7 @@ services:
     hostname: hadoop-slave2
     networks:
       bigdata:
+        ipv4_address: 172.25.0.12
         aliases:
         - hadoop-slave2
     tty: true
@@ -52,9 +54,13 @@ services:
     hostname: hadoop-master
     networks:
       bigdata:
+        ipv4_address: 172.25.0.10
         aliases:
         - hadoop-master
     tty: true
 
 networks:
   bigdata:
+    ipam:
+      config:
+      - subnet: 172.25.0.0/24
