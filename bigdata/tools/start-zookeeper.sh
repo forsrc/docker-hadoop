@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 echo ================================================ START
-echo `hostname` ... START
+echo [*] `hostname` ... START
 
 . /root/.bashrc
 
-echo $ZOOKEEPER_HOME/bin/zkServer.sh start
+[*] echo $ZOOKEEPER_HOME/bin/zkServer.sh start
 $ZOOKEEPER_HOME/bin/zkServer.sh start
 
 sleep 5
 $ZOOKEEPER_HOME/bin/zkServer.sh status
 
-echo `hostname` ... END
+echo [*] `hostname` ... END
 echo ================================================ END
