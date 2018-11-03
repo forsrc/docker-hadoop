@@ -10,21 +10,29 @@ import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.api.java.function.VoidFunction;
 import scala.Tuple2;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 
 public class WordCount {
 
-    public static void main(String[] args) {
-        String filename = WordCount.class.getClassLoader().getResource("WordCount.txt").getFile();
+    public static void main(String[] args) throws IOException {
 
-        SparkConf sparkConf = new SparkConf().setAppName("forsrc-spark-wordcount").setMaster("local");
+        //String filename = WordCount.class.getClassLoader().getResource("WordCount.txt").getFile();
+        String input = args.length > 0 ? args[1] : "hdfs://hadoop-master:9000/user/root/input/wordcount/WordCount.txt";
+        String output  = args.length > 0 ? args[2] : "hdfs://hadoop-master:9000/user/root/output/wordcount/";
+        SparkConf sparkConf = new SparkConf()
+                .setAppName("forsrc-spark-wordcount")
+                .setMaster(args.length > 0 ? args[0] : "local")
+                //.setMaster("spark://hadoop-master:7077")
+                ;
         JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);
+
         
         //JavaSparkContext javaSparkContext = new JavaSparkContext(
                 //"local", "wordcount", System.getenv("SPARK_HOME"), System.getenv("JARS"));
 
-        JavaRDD<String> dataRdd = javaSparkContext.textFile(filename);
+        JavaRDD<String> dataRdd = javaSparkContext.textFile(input).cache();
 
         JavaRDD<String> wordsRdd = dataRdd.flatMap(new FlatMapFunction<String, String>() {
 
@@ -56,7 +64,7 @@ public class WordCount {
 
             }
         });
-        // countPairRdd.saveAsTextFile("WordCount");
-        javaSparkContext.close();
+        countPairRdd.saveAsTextFile(output);
+        javaSparkContext.stop();
     }
 }
