@@ -11,6 +11,7 @@ echo $SPARK_HOME/sbin/start-history-server.sh
 mkdir /tmp/spark-events
 $SPARK_HOME/sbin/start-history-server.sh
 
+sleep 10
 echo $SPARK_HOME/bin/spark-shell
 $SPARK_HOME/bin/spark-shell
 
