@@ -2,8 +2,8 @@ package com.forsrc.spark.demo.java;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaInputDStream;
@@ -14,10 +14,7 @@ import org.apache.spark.streaming.kafka010.KafkaUtils;
 import org.apache.spark.streaming.kafka010.LocationStrategies;
 import scala.Tuple2;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class StreamingWordCount {
 
@@ -31,6 +28,8 @@ public class StreamingWordCount {
                 .setMaster("local[4]");
 
         JavaStreamingContext javaStreamingContext = new JavaStreamingContext(sparkConf, Durations.seconds(10));
+
+        javaStreamingContext.checkpoint("/tmp/spark/streaming/checkpoint");
 
         Map<String, Object> kafkaParams = new HashMap<>();
         kafkaParams.put("bootstrap.servers", "localhost:9092");
@@ -56,7 +55,23 @@ public class StreamingWordCount {
         JavaDStream<String> words = records.flatMap(t -> Arrays.asList(t._2.split(" ")).iterator());
 
         JavaPairDStream<String, Integer> pairs = words.mapToPair(s -> new Tuple2<>(s, 1));
-        JavaPairDStream<String, Integer> wordCounts = pairs.reduceByKey((i1, i2) -> i1 + i2);
+        //JavaPairDStream<String, Integer> wordCounts = pairs.reduceByKey((i1, i2) -> i1 + i2);
+
+
+        JavaPairDStream<String, Integer> wordCounts = pairs.updateStateByKey(new Function2<List<Integer>, org.apache.spark.api.java.Optional<Integer>, org.apache.spark.api.java.Optional<Integer>>() {
+            @Override
+            public org.apache.spark.api.java.Optional<Integer> call(List<Integer> values, org.apache.spark.api.java.Optional<Integer> state) throws Exception {
+                Integer updatedValue = 0;
+
+                if (state.isPresent()) {
+                    updatedValue = state.get();
+                }
+                for (Integer value : values) {
+                    updatedValue += value;
+                }
+                return org.apache.spark.api.java.Optional.of(updatedValue);
+            }
+        });
 
         wordCounts.print();
         javaStreamingContext.start();              // Start the computation
