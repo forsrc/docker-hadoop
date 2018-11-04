@@ -3,7 +3,6 @@ package com.forsrc.spark.demo.java;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaInputDStream;
@@ -14,7 +13,10 @@ import org.apache.spark.streaming.kafka010.KafkaUtils;
 import org.apache.spark.streaming.kafka010.LocationStrategies;
 import scala.Tuple2;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StreamingWordCount {
 
@@ -58,19 +60,30 @@ public class StreamingWordCount {
         //JavaPairDStream<String, Integer> wordCounts = pairs.reduceByKey((i1, i2) -> i1 + i2);
 
 
-        JavaPairDStream<String, Integer> wordCounts = pairs.updateStateByKey(new Function2<List<Integer>, org.apache.spark.api.java.Optional<Integer>, org.apache.spark.api.java.Optional<Integer>>() {
-            @Override
-            public org.apache.spark.api.java.Optional<Integer> call(List<Integer> values, org.apache.spark.api.java.Optional<Integer> state) throws Exception {
-                Integer updatedValue = 0;
+//        JavaPairDStream<String, Integer> wordCounts = pairs.updateStateByKey(new Function2<List<Integer>, org.apache.spark.api.java.Optional<Integer>, org.apache.spark.api.java.Optional<Integer>>() {
+//            @Override
+//            public org.apache.spark.api.java.Optional<Integer> call(List<Integer> values, org.apache.spark.api.java.Optional<Integer> state) throws Exception {
+//                Integer updatedValue = 0;
+//
+//                if (state.isPresent()) {
+//                    updatedValue = state.get();
+//                }
+//                for (Integer value : values) {
+//                    updatedValue += value;
+//                }
+//                return org.apache.spark.api.java.Optional.of(updatedValue);
+//            }
+//        });
 
-                if (state.isPresent()) {
-                    updatedValue = state.get();
-                }
-                for (Integer value : values) {
-                    updatedValue += value;
-                }
-                return org.apache.spark.api.java.Optional.of(updatedValue);
+        JavaPairDStream<String, Integer> wordCounts = pairs.updateStateByKey((values, state) -> {
+            Integer updatedValue = 0;
+            if (state.isPresent()) {
+                updatedValue = state.get();
             }
+            for (Integer value : values) {
+                updatedValue += value;
+            }
+            return org.apache.spark.api.java.Optional.of(updatedValue);
         });
 
         wordCounts.print();
