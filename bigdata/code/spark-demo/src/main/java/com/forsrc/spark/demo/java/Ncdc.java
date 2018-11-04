@@ -15,7 +15,7 @@ public class Ncdc {
         String output = args.length > 0 ? args[2] : "hdfs://hadoop-master:9000/user/root/output/ncdc/";
         SparkConf sparkConf = new SparkConf()
                 .setAppName("forsrc-spark-ncdc")
-                .setMaster(master)
+                //.setMaster(master)
                 //.setMaster("spark://hadoop-master:7077")
                 ;
         JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);

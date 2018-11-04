@@ -19,40 +19,40 @@
     <dependencies>
         <dependency> <!-- Spark dependency -->
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.10</artifactId>
-            <version>2.2.2</version>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>2.3.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency> <!-- Spark dependency -->
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.10</artifactId>
-            <version>2.2.2</version>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.3.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency> <!-- Spark dependency -->
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_2.10</artifactId>
-            <version>2.2.2</version>
+            <artifactId>spark-hive_2.11</artifactId>
+            <version>2.3.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency> <!-- Spark dependency -->
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_2.10</artifactId>
-            <version>2.2.2</version>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>2.3.1</version>
         </dependency>
         <!--<dependency> &lt;!&ndash; Spark dependency &ndash;&gt;-->
             <!--<groupId>org.apache.spark</groupId>-->
-            <!--<artifactId>spark-streaming-kafka_2.10</artifactId>-->
-            <!--<version>2.2.2</version>-->
+            <!--<artifactId>spark-streaming-kafka_2.11</artifactId>-->
+            <!--<version>2.3.1</version>-->
         <!--</dependency>-->
         <dependency> <!-- Spark dependency -->
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_2.10</artifactId>
-            <version>2.2.2</version>
+            <artifactId>spark-mllib_2.11</artifactId>
+            <version>2.3.1</version>
         </dependency>
         <dependency> <!-- Cassandra -->
             <groupId>com.datastax.spark</groupId>
-            <artifactId>spark-cassandra-connector_2.10</artifactId>
+            <artifactId>spark-cassandra-connector_2.11</artifactId>
             <version>2.0.10</version>
         </dependency>
         <dependency> <!-- Jetty demmo -->
@@ -72,7 +72,7 @@
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.10</artifactId>
+            <artifactId>scalatest_2.11</artifactId>
             <version>2.2.1</version>
         </dependency>
     </dependencies>
@@ -92,7 +92,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.2</version>
+                <version>2.3.1</version>
                 <!-- The configuration of the plugin -->
                 <configuration>
                     <!-- Specifies the configuration file of the assembly plugin -->
