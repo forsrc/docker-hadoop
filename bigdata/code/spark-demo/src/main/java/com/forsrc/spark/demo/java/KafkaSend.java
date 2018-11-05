@@ -11,6 +11,8 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class KafkaSend {
 
@@ -44,26 +46,36 @@ public class KafkaSend {
         props.put("value.deserializer", StringDeserializer.class.getName());
 
 
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        final KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList(topic));
         new Thread() {
             @Override
             public void run() {
-                while (true) {
+                int i = 0;
+                while (i++ < 3) {
                     ConsumerRecords<String, String> records = consumer.poll(100);
                     for (ConsumerRecord<String, String> record : records) {
                         System.out.printf("records -> offset = %d, key = %s, value = %s", record.offset(), record.key(), record.value());
                         System.out.println();
                     }
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(1000);
+                    } catch (InterruptedException e) {
+                    }
                 }
+                consumer.close();
             }
         }//.start()
         ;
 
+
         Producer<String, String> producer = new KafkaProducer<String, String>(props);
 
         for (int i = 0; i < 10; i++) {
-            ProducerRecord producerRecord = new ProducerRecord<String, String>(topic, Integer.toString(i), "a b c " + Integer.toString(i));
+            ProducerRecord producerRecord = new ProducerRecord<String, String>(
+                    topic,
+                    UUID.randomUUID().toString(),
+                    UUID.randomUUID().toString() + " a b c " + Integer.toString(i));
             producer.send(producerRecord);
             System.out.println("send -> " + producerRecord);
         }
