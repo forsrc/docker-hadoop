@@ -18,12 +18,13 @@ public class WordCount {
 
     public static void main(String[] args) throws IOException {
 
+        System.setProperty("user.name", "root");
         //String filename = WordCount.class.getClassLoader().getResource("WordCount.txt").getFile();
         String input = args.length > 0 ? args[1] : "hdfs://hadoop-master:9000/user/root/input/wordcount/WordCount.txt";
         String output  = args.length > 0 ? args[2] : "hdfs://hadoop-master:9000/user/root/output/wordcount/";
         SparkConf sparkConf = new SparkConf()
                 .setAppName("forsrc-spark-wordcount")
-                .setMaster(args.length > 0 ? args[0] : "local")
+                //.setMaster(args.length > 0 ? args[0] : "local")
                 //.setMaster("spark://hadoop-master:7077")
                 ;
         JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);
@@ -64,7 +65,7 @@ public class WordCount {
 
             }
         });
-        countPairRdd.saveAsTextFile(output);
+        //countPairRdd.saveAsTextFile(output);
         javaSparkContext.stop();
     }
 }
