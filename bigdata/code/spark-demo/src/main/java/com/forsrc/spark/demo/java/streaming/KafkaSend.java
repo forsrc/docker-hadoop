@@ -1,4 +1,4 @@
-package com.forsrc.spark.demo.java;
+package com.forsrc.spark.demo.java.streaming;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

@@ -1,4 +1,4 @@
-package com.forsrc.spark.demo.java;
+package com.forsrc.spark.demo.java.demo;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;

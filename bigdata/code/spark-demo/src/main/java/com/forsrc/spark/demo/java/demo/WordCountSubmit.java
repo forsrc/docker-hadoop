@@ -1,4 +1,4 @@
-package com.forsrc.spark.demo.java;
+package com.forsrc.spark.demo.java.demo;
 
 import com.forsrc.utils.JarUtils;
 import org.apache.spark.deploy.SparkSubmit;
