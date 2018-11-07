@@ -10,7 +10,7 @@ fi
 # OpenJDK
 export JAVA_HOME=/tools/jdk1.8.0_192
 
-export HADOOP_HOME=/tools/hadoop-2.7.7
+export HADOOP_HOME=/tools/hadoop-3.1.1
 
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
@@ -33,5 +33,12 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH:$HADOOP_HOME/lib/native/:.
 export PATH=.:$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOME/bin:$HIVE_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZOOKEEPER_HOME/bin:$KAFKA_HOME/bin
 
 export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
+
+# hadoop-3.1.1
+export HDFS_DATANODE_SECURE_USER=root
+export HDFS_NAMENODE_USER=root
+export HDFS_SECONDARYNAMENODE_USER=root
+export YARN_RESOURCEMANAGER_USER=root
+export YARN_NODEMANAGER_USER=root
 
 echo `hostname` /root/.bashrc
