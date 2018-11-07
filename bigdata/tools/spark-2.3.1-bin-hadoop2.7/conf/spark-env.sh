@@ -3,7 +3,7 @@
 # This file is sourced when running various Spark programs.
 # Copy it as spark-env.sh and edit that to configure Spark for your site.
 
-# Options read when launching programs locally with 
+# Options read when launching programs locally with
 # ./bin/run-example or ./bin/spark-submit
 # - HADOOP_CONF_DIR, to point Spark towards Hadoop configuration files
 # - SPARK_LOCAL_IP, to set the IP address Spark binds to on this node
@@ -39,10 +39,9 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 # - SPARK_WORKER_CORES, to set the number of cores to use on this machine
 # - SPARK_WORKER_MEMORY, to set how much total memory workers have to give executors (e.g. 1000m, 2g)
 
-export HIVE_HOME=/root/hive
+
 export SPARK_WORKER_MEMORY=2g
 export SPARK_MASTER_IP=hadoop-master
-export HIVE_CONF_DIR=$HIVE_HOME/conf
 
 # - SPARK_WORKER_PORT / SPARK_WORKER_WEBUI_PORT, to use non-default ports for the worker
 # - SPARK_WORKER_INSTANCES, to set the number of worker processes per node
