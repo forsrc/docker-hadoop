@@ -26,8 +26,8 @@ export KAFKA_HOME=/tools/kafka_2.11-2.0.0
 
 export HBASE_HOME=/tools/hbase-2.1.0
 
-#export SPARK_HOME=/tools/spark-2.3.1-bin-hadoop2.7
-export SPARK_HOME=/tools/spark-2.3.2-bin-without-hadoop
+export SPARK_HOME=/tools/spark-2.3.1-bin-hadoop2.7
+#export SPARK_HOME=/tools/spark-2.3.2-bin-without-hadoop
 
 export PIG_HOME=/tools/pig-0.17.0
 
