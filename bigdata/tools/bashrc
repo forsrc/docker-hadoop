@@ -37,6 +37,7 @@ export PATH=.:$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOM
 
 export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
 
+export JSVC_HOME=/tools/commons-daemon-1.1.0-native/unix
 # hadoop-3.1.1
 export HDFS_DATANODE_SECURE_USER=root
 export HDFS_NAMENODE_USER=root
