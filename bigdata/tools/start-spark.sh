@@ -4,6 +4,9 @@ echo [*] `hostname` ... START
 
 . /root/.bashrc
 
+#echo [*] "find $HADOOP_HOME/share/ -name hadoop*.jar | xargs -i cp {} $SPARK_HOME/jars"
+#find $HADOOP_HOME/share/ -name "hadoop*.jar" | xargs -i awk 'BEGIN { cmd="cp -i {} $SPARK_HOME/jars"; print "n" |cmd; }'
+
 echo [*] $SPARK_HOME/sbin/start-all.sh
 $SPARK_HOME/sbin/start-all.sh
 
