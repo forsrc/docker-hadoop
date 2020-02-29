@@ -39,7 +39,9 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH:$HADOOP_HOME/lib/native/:.
 
 export SCALA_HOME=$TOOLS_HOME/scala-2.11.12
 
-export PATH=.:$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOME/bin:$HIVE_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZOOKEEPER_HOME/bin:$KAFKA_HOME/bin:$SCALA_HOME/bin
+export KYLIN_HOME=$TOOLS_HOME/apache-kylin-2.6.2-bin-hbase1x
+
+export PATH=.:$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOME/bin:$HIVE_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZOOKEEPER_HOME/bin:$KAFKA_HOME/bin:$SCALA_HOME/bin:$KYLIN_HOME/bin
 
 export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
 
